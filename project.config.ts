@@ -18,6 +18,7 @@ export const PATHS = {
   aliases: {
     app: resolve(SOURCE, 'app'),
     assets: resolve(SOURCE, 'assets'),
+    settings: resolve(SOURCE, 'settings'),
     store: resolve(SOURCE, 'store'),
     styles: resolve(SOURCE, 'styles'),
   },

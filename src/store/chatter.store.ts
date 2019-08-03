@@ -1,1 +1,3 @@
-export class ChatterStore {}
+export class ChatterStore {
+  // chatter = interval(1000);
+}

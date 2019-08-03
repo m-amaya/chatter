@@ -15,6 +15,7 @@ module.exports = {
   rules: {
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-object-literal-type-assertion': 'off',
     'import/prefer-default-export': 'off',
     'import/no-unresolved': 'off',
     'no-case-declarations': 'off',

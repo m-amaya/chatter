@@ -8,5 +8,9 @@ module.exports = {
     '@emotion/css-prop',
   ],
 
-  plugins: ['react-hot-loader/babel', '@babel/transform-runtime'],
+  plugins: [
+    'react-hot-loader/babel', 
+    '@babel/transform-runtime', 
+    ['@babel/proposal-class-properties', { loose: true }]
+  ],
 };

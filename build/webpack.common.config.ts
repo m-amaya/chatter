@@ -21,6 +21,7 @@ const config: Configuration = {
     alias: {
       app: PATHS.aliases.app,
       assets: PATHS.aliases.assets,
+      settings: PATHS.aliases.settings,
       store: PATHS.aliases.store,
       styles: PATHS.aliases.styles,
     },

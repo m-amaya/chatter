@@ -33,16 +33,17 @@
     "@hot-loader/react-dom": "^16.8.6",
     "color": "^3.1.2",
     "luxon": "^1.17.2",
-    "navigo": "^7.1.2",
     "ramda": "^0.26.1",
     "react": "^16.8.6",
     "react-dom": "npm:@hot-loader/react-dom",
     "react-hot-loader": "^4.12.10",
     "react-spring": "^8.0.27",
-    "rxjs": "^6.5.2"
+    "rxjs": "^6.5.2",
+    "rxjs-hooks": "^0.5.1"
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/plugin-transform-runtime": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
     "@babel/preset-react": "^7.0.0",
