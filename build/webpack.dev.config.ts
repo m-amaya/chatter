@@ -25,6 +25,9 @@ const config: Configuration = merge(common, {
       NODE_ENV: 'development',
     }),
   ],
+  output: {
+    publicPath: '/',
+  },
 });
 
 export default config;

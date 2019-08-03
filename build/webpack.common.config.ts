@@ -16,7 +16,6 @@ const config: Configuration = {
     path: PATHS.output,
     filename: '[name].[hash].js',
     chunkFilename: '[name].[hash].js',
-    publicPath: './',
   },
   resolve: {
     alias: {
@@ -32,12 +31,7 @@ const config: Configuration = {
       {
         test: /\.[jt]sx?$/,
         exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            cacheDirectory: true,
-          },
-        },
+        loader: 'babel-loader',
       },
       {
         test: /\.svg$/,

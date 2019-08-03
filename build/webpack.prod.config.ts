@@ -1,5 +1,4 @@
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
-import UglifyJSPlugin from 'uglifyjs-webpack-plugin';
 import { Configuration, EnvironmentPlugin } from 'webpack';
 import merge from 'webpack-merge';
 import common from './webpack.common.config';
@@ -11,9 +10,7 @@ const config: Configuration = merge(common, {
   mode: 'production',
   devtool: 'source-map',
   optimization: {
-    minimizer: [
-      new UglifyJSPlugin({ cache: true, parallel: true, sourceMap: true }),
-    ],
+    minimize: true,
   },
   plugins: [
     new CleanWebpackPlugin(),
@@ -22,6 +19,9 @@ const config: Configuration = merge(common, {
       NODE_ENV: 'production',
     }),
   ],
+  output: {
+    publicPath: '/chatter',
+  },
 });
 
 export default config;
