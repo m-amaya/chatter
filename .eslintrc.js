@@ -2,6 +2,7 @@ module.exports = {
   env: {
     browser: true,
     es6: true,
+    jest: true,
     node: true,
   },
   plugins: ['@typescript-eslint', 'import'],
@@ -21,6 +22,7 @@ module.exports = {
     'no-empty-pattern': 'off',
     'no-unneeded-ternary': 'off',
     'react/jsx-filename-extension': ['on', { extensions: ['.tsx'] }],
+    'react/prop-types': 'off',
     'radix': 'off',
   },
   parser: '@typescript-eslint/parser',
