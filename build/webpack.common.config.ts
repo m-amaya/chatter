@@ -16,7 +16,7 @@ const config: Configuration = {
     path: PATHS.output,
     filename: '[name].[hash].js',
     chunkFilename: '[name].[hash].js',
-    publicPath: '/',
+    publicPath: './',
   },
   resolve: {
     alias: {
@@ -57,6 +57,7 @@ const config: Configuration = {
   plugins: [
     new NamedModulesPlugin(),
     new HTMLWebpackPlugin({
+      cache: true,
       filename: PATHS.index.output,
       template: PATHS.index.input,
       favicon: PATHS.favicon,
