@@ -61,4 +61,13 @@ export const theme = {
     bg: colors.purple,
     fg: colors.white,
   },
+  badge: {
+    bg: colors.grayDarker,
+    fg: colors.white,
+  },
+  toggle: {
+    bg: colors.grayLightest,
+    bgKnob: colors.purple,
+    border: colors.grayLighter,
+  },
 };

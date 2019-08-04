@@ -3,7 +3,7 @@ import { style } from 'styles';
 
 const {
   constants: { font },
-  theme: { page },
+  theme: { page, link },
 } = style;
 
 export const LogoText = styled.span({
@@ -24,4 +24,14 @@ export const TitleText = styled.span({
   fontFamily: font.family.title,
   fontSize: '2em',
   fontWeight: font.weight.title.bold,
+});
+
+export const Link = styled.a({
+  'color': link.fg,
+  'cursor': 'pointer',
+  'fontSize': '0.8em',
+  'fontWeight': font.weight.text.bold,
+  '&:hover': {
+    textDecoration: 'underline',
+  },
 });
