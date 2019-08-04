@@ -1,12 +1,14 @@
+import { Subject } from 'rxjs';
+
 export type View = 'home' | 'browse' | 'alerts' | 'profile';
-export type ShowViewFn = (view: View) => View;
+export type ShowViewFn = (view: View) => void;
 
 export class ViewStore {
   constructor() {
-    this.currentView = 'home';
+    this.currentView$.next('home');
   }
 
-  public currentView: View;
+  public currentView$ = new Subject<View>();
 
-  public showView = (view: View) => (this.currentView = view);
+  public showView = (view: View) => this.currentView$.next(view);
 }

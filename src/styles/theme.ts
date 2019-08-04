@@ -35,6 +35,7 @@ export const theme = {
   },
   sidebar: {
     bg: colors.grayLightest,
+    bgHover: rgba(colors.grayLighter, 0.5),
     fg: colors.grayDarker,
     fgActive: colors.purple,
     border: colors.grayLighter,

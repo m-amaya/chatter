@@ -13,6 +13,7 @@ import { Icon } from 'app/components/Icon';
 import { LogoText, TabText } from 'app/components/Typography';
 import LogoSvg from 'assets/icons/chatter-icon.svg';
 import React from 'react';
+import { useObservable } from 'rxjs-hooks';
 import { StoreCtx } from 'store';
 import { ShowViewFn, View } from 'store/view.store';
 import { StyleCtx } from 'styles';
@@ -35,8 +36,9 @@ export const Sidebar: React.FC = () => {
     theme: { sidebar },
   } = React.useContext(StyleCtx);
   const {
-    view: { currentView, showView },
+    view: { currentView$, showView },
   } = React.useContext(StoreCtx);
+  const currentView = useObservable(() => currentView$, 'home');
 
   return (
     <Flex
@@ -51,8 +53,8 @@ export const Sidebar: React.FC = () => {
           key={tab.view}
           tab={tab}
           isActive={tab.view === currentView}
-          activeColor={sidebar.fgActive}
           showView={showView}
+          style={sidebar}
         />
       ))}
     </Flex>
@@ -80,16 +82,23 @@ const Logo: React.FC<{ borderColor: string; showView: ShowViewFn }> = ({
 const Tab: React.FC<{
   tab: Tab;
   isActive: boolean;
-  activeColor: string;
   showView: ShowViewFn;
-}> = ({ tab: { icon, text, view }, isActive, activeColor, showView }) => (
+  style: {
+    bgHover: string;
+    fgActive: string;
+  };
+}> = ({ tab: { icon, text, view }, isActive, showView, style }) => (
   <Flex
     row
     align="center"
     css={{
-      color: isActive ? activeColor : undefined,
-      cursor: 'pointer',
-      height: '4em',
+      'color': isActive ? style.fgActive : undefined,
+      'cursor': 'pointer',
+      'height': '4em',
+      'transition': 'all 200ms',
+      '&:hover': {
+        backgroundColor: !isActive ? style.bgHover : undefined,
+      },
     }}
     onClick={() => showView(view)}>
     <FontAwesomeIcon
