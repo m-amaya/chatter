@@ -122,8 +122,9 @@ const BaseDiv = styled('div', {
   shouldForwardProp: (prop) =>
     isPropValid(prop) && prop !== 'wrap' && prop !== 'overflow',
 })<FlexProps>(baseStyle, flexStyle);
-const BaseButton = BaseDiv.withComponent('button');
 const BaseForm = BaseDiv.withComponent('form');
+const BaseTextarea = BaseDiv.withComponent('textarea');
+const BaseButton = BaseDiv.withComponent('button');
 
 /**
  * Flex is our primary view primitive.
@@ -140,12 +141,19 @@ export const Flex = React.forwardRef<
   FlexProps & JSX.IntrinsicElements['div']
 >((props, ref) => <BaseDiv ref={ref} data-test={props.testId} {...props} />);
 
-export const FlexButton = React.forwardRef<
-  HTMLButtonElement,
-  FlexProps & JSX.IntrinsicElements['button']
->((props, ref) => <BaseButton ref={ref} data-test={props.testId} {...props} />);
-
 export const FlexForm = React.forwardRef<
   HTMLFormElement,
   FlexProps & JSX.IntrinsicElements['form']
 >((props, ref) => <BaseForm ref={ref} data-test={props.testId} {...props} />);
+
+export const FlexTextarea = React.forwardRef<
+  HTMLTextAreaElement,
+  FlexProps & JSX.IntrinsicElements['textarea']
+>((props, ref) => (
+  <BaseTextarea ref={ref} data-test={props.testId} {...props} />
+));
+
+export const FlexButton = React.forwardRef<
+  HTMLButtonElement,
+  FlexProps & JSX.IntrinsicElements['button']
+>((props, ref) => <BaseButton ref={ref} data-test={props.testId} {...props} />);

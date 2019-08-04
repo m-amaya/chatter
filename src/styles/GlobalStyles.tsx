@@ -9,6 +9,8 @@ const globalStyles = css({
     'fontFamily': style.constants.font.family.text,
     'fontSize': style.constants.font.size,
     'fontWeight': style.constants.font.weight.text.regular,
+    'letterSpacing': '0.01em',
+    'lineHeight': 1.43,
     'minWidth': style.constants.font.breakpoint.sm,
 
     /** Font smoothing */
