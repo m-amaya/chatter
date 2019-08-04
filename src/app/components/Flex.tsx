@@ -7,7 +7,6 @@ import React from 'react';
  * Types
  */
 
-type CssSize = string | number;
 type Alignment = 'stretch' | 'center' | 'baseline' | 'start' | 'end';
 type Justification =
   | 'normal'

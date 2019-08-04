@@ -39,6 +39,10 @@ export const theme = {
     fgActive: colors.purple,
     border: colors.grayLighter,
   },
+  sidepanel: {
+    bg: colors.grayLightest,
+    border: colors.grayLighter,
+  },
   link: {
     fg: colors.purple,
   },

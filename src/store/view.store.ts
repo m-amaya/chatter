@@ -1,4 +1,5 @@
-type View = 'home' | 'browse' | 'alerts' | 'profile';
+export type View = 'home' | 'browse' | 'alerts' | 'profile';
+export type ShowViewFn = (view: View) => View;
 
 export class ViewStore {
   constructor() {

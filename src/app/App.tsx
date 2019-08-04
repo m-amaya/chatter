@@ -1,8 +1,16 @@
+import { Flex } from 'app/components/Flex';
+import { Page } from 'app/components/Page';
+import { Sidebar } from 'app/components/Sidebar';
+import { SidePanel } from 'app/components/SidePanel';
 import React from 'react';
 import { hot } from 'react-hot-loader/root';
 
-export const App: React.FC = hot(() => {
-  // const tweet = useObservable(() => chatter);
+// const tweet = useObservable(() => chatter);
 
-  return <div>Hello World</div>;
-});
+export const App: React.FC = hot(() => (
+  <Flex row css={{ height: '100vh' }}>
+    <Sidebar />
+    <Page />
+    <SidePanel />
+  </Flex>
+));
