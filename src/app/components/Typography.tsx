@@ -18,3 +18,10 @@ export const TabText = styled.span({
   fontSize: '1em',
   fontWeight: font.weight.text.bold,
 });
+
+export const TitleText = styled.span({
+  color: page.fgTitle,
+  fontFamily: font.family.title,
+  fontSize: '2em',
+  fontWeight: font.weight.title.bold,
+});
