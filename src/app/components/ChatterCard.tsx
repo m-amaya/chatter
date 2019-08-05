@@ -1,14 +1,18 @@
 import { faThumbsUp, faThumbsDown } from '@fortawesome/free-regular-svg-icons';
-import { faHippo } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  FontAwesomeIcon,
+  Props as FontAwesomeProps,
+} from '@fortawesome/react-fontawesome';
 import { FlexForm, Flex } from 'app/components/Flex';
 import { TimestampText, UsernameText } from 'app/components/Typography';
 import React from 'react';
+import TimeAgo from 'react-timeago';
+import { Post } from 'store/chatter.store';
+import { User } from 'store/user.store';
 import { StyleCtx } from 'styles';
-import { generateChatterText } from 'utils/lorem';
 import { Textarea, Button } from './Form';
 
-export const ChatterForm: React.FC = () => {
+export const ChatterForm: React.FC<{ user: User }> = ({ user }) => {
   const {
     theme: { button, card },
   } = React.useContext(StyleCtx);
@@ -21,7 +25,10 @@ export const ChatterForm: React.FC = () => {
         padding: '1em',
       }}>
       <Flex row>
-        <Avatar style={{ bg: card.bgPlacemat, border: card.border }} />
+        <Avatar
+          icon={user.icon}
+          theme={{ bg: card.bgPlacemat, border: card.border, fg: user.color }}
+        />
         <Textarea placeholder="What's on your mind?" theme={card} />
       </Flex>
       <Flex justify="end" row>
@@ -32,9 +39,12 @@ export const ChatterForm: React.FC = () => {
 };
 
 export const ChatterCard: React.FC<{
-  isLiked?: boolean;
-  isDisliked?: boolean;
-}> = ({ isLiked, isDisliked }) => {
+  post: Post;
+  user: User;
+}> = ({
+  post: { username, timestamp, content, count, isLiked, isDisliked },
+  user,
+}) => {
   const {
     theme: { card },
   } = React.useContext(StyleCtx);
@@ -55,17 +65,21 @@ export const ChatterCard: React.FC<{
         }}>
         <CardHead>
           <Avatar
-            style={{
+            icon={user.icon}
+            theme={{
               bg: card.bgPlacemat,
               border: card.border,
+              fg: user.color,
             }}
           />
           <Flex css={{ paddingLeft: '1em' }}>
-            <UsernameText>Marissa Amaya</UsernameText>
-            <TimestampText>May 29 &bull; 9:25am</TimestampText>
+            <UsernameText>{username}</UsernameText>
+            <TimestampText>
+              <TimeAgo date={timestamp} /> &bull; Post #{count}
+            </TimestampText>
           </Flex>
         </CardHead>
-        <CardBody />
+        <CardBody>{content}</CardBody>
       </Card>
       <ThumbColumn
         isLiked={isLiked}
@@ -118,16 +132,16 @@ const Card: React.FC<{
 
 const CardHead: React.FC = (props) => <Flex align="center" row {...props} />;
 
-const CardBody: React.FC = () => (
+const CardBody: React.FC = (props) => (
   <div
     css={{
       paddingTop: '1em',
       width: '100%',
       wordWrap: 'break-word',
       overflowWrap: 'break-word',
-    }}>
-    {generateChatterText()}
-  </div>
+    }}
+    {...props}
+  />
 );
 
 const ThumbColumn: React.FC<{
@@ -190,19 +204,21 @@ const ThumbIcon: React.FC<{
   );
 };
 
-const Avatar: React.FC<{ style: { bg: string; border: string } }> = ({
-  style,
-}) => (
+const Avatar: React.FC<{
+  icon: FontAwesomeProps['icon'];
+  theme: { bg: string; border: string; fg: string };
+}> = ({ icon, theme }) => (
   <Flex
     align="center"
     justify="center"
     css={{
-      backgroundColor: style.bg,
-      border: `1px solid ${style.border}`,
+      backgroundColor: theme.bg,
+      border: `1px solid ${theme.border}`,
       borderRadius: '50%',
+      color: theme.fg,
       height: '4em',
       width: '4em',
     }}>
-    <FontAwesomeIcon icon={faHippo} css={{ fontSize: '2em' }} />
+    <FontAwesomeIcon icon={icon} css={{ fontSize: '2em' }} />
   </Flex>
 );
