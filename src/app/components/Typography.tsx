@@ -3,7 +3,7 @@ import { style } from 'styles';
 
 const {
   constants: { font },
-  theme: { page, link },
+  theme: { page, link, card },
 } = style;
 
 export const LogoText = styled.span({
@@ -34,4 +34,14 @@ export const Link = styled.a({
   '&:hover': {
     textDecoration: 'underline',
   },
+});
+
+export const UsernameText = styled.div({
+  color: card.fgTitle,
+  fontWeight: font.weight.text.bold,
+});
+
+export const TimestampText = styled.div({
+  color: card.fgSubtitle,
+  fontSize: '0.9em',
 });

@@ -21,6 +21,7 @@ export const PATHS = {
     settings: resolve(SOURCE, 'settings'),
     store: resolve(SOURCE, 'store'),
     styles: resolve(SOURCE, 'styles'),
+    utils: resolve(SOURCE, 'utils'),
   },
 };
 

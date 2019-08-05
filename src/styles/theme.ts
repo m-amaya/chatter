@@ -49,20 +49,23 @@ export const theme = {
   },
   card: {
     bg: colors.white,
+    bgHover: rgba(colors.grayLighter, 0.5),
     bgPlacemat: colors.grayLightest,
     fg: colors.grayDarker,
+    fgHover: colors.grayDark,
     fgTitle: colors.black,
     fgSubtitle: colors.grayDark,
-    border: colors.gray,
-    borderLiked: colors.purple,
+    fgLiked: colors.purple,
+    fgDisliked: colors.black,
     fgPlaceholder: colors.grayDark,
+    border: colors.gray,
   },
   button: {
     bg: colors.purple,
     fg: colors.white,
   },
   badge: {
-    bg: colors.grayDarker,
+    bg: colors.purple,
     fg: colors.white,
   },
   toggle: {

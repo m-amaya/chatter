@@ -24,6 +24,7 @@ const config: Configuration = {
       settings: PATHS.aliases.settings,
       store: PATHS.aliases.store,
       styles: PATHS.aliases.styles,
+      utils: PATHS.aliases.utils,
     },
     extensions: ['.js', '.ts', '.tsx'],
   },

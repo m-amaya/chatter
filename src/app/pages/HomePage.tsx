@@ -1,4 +1,4 @@
-import { ChatterForm } from 'app/components/ChatterCard';
+import { ChatterCard, ChatterForm } from 'app/components/ChatterCard';
 import { FilterBar } from 'app/components/FilterBar';
 import { Flex } from 'app/components/Flex';
 import { Page } from 'app/components/Page';
@@ -10,6 +10,10 @@ export const HomePage: React.FC = () => (
     <ChatterForm />
     <Title />
     <FilterBar />
+    <ChatterCard />
+    <ChatterCard isLiked />
+    <ChatterCard isDisliked />
+    <ChatterCard />
   </Page>
 );
 
