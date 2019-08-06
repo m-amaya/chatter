@@ -12,6 +12,9 @@ import { User } from 'store/user.store';
 import { StyleCtx } from 'styles';
 import { Textarea, Button } from './Form';
 
+/**
+ * Chatter Form
+ */
 export const ChatterForm: React.FC<{
   user: User;
   onChange: ClickHandler<HTMLTextAreaElement>;
@@ -46,6 +49,9 @@ export const ChatterForm: React.FC<{
   );
 };
 
+/**
+ * Chatter Card
+ */
 export const ChatterCard: React.FC<{
   post: Post;
   isLiked?: boolean;
@@ -106,6 +112,9 @@ export const ChatterCard: React.FC<{
   );
 };
 
+/**
+ * Placemat
+ */
 const Placemat: React.FC<{ theme: { bg: string; border: string } }> = ({
   theme,
   ...rest
@@ -124,6 +133,9 @@ const Placemat: React.FC<{ theme: { bg: string; border: string } }> = ({
   />
 );
 
+/**
+ * Card
+ */
 const Card: React.FC<{
   isDisliked?: boolean;
   theme: { bg: string; border: string };
@@ -141,8 +153,14 @@ const Card: React.FC<{
   />
 );
 
+/**
+ * Card Head
+ */
 const CardHead: React.FC = (props) => <Flex align="center" row {...props} />;
 
+/**
+ * Card Body
+ */
 const CardBody: React.FC = (props) => (
   <div
     css={{
@@ -155,6 +173,9 @@ const CardBody: React.FC = (props) => (
   />
 );
 
+/**
+ * Thumb Column
+ */
 const ThumbColumn: React.FC<{
   isLiked?: boolean;
   isDisliked?: boolean;
@@ -189,6 +210,9 @@ const ThumbColumn: React.FC<{
   </Flex>
 );
 
+/**
+ * Thumb Icon
+ */
 const ThumbIcon: React.FC<{
   direction: 'up' | 'down';
   isLiked?: boolean;
@@ -220,6 +244,9 @@ const ThumbIcon: React.FC<{
   );
 };
 
+/**
+ * Avatar
+ */
 const Avatar: React.FC<{
   icon: FontAwesomeProps['icon'];
   theme: { bg: string; border: string; fg: string };

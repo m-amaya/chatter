@@ -12,7 +12,7 @@ import { Flex } from 'app/components/Flex';
 import { Icon } from 'app/components/Icon';
 import { LogoText, TabText } from 'app/components/Typography';
 import LogoSvg from 'assets/icons/chatter-icon.svg';
-import React from 'react';
+import React, { useContext } from 'react';
 import { useObservable } from 'rxjs-hooks';
 import { StoreCtx } from 'store';
 import { ShowViewFn, View } from 'store/view.store';
@@ -31,13 +31,16 @@ const TABS: Tab[] = [
   { text: 'Profile', view: 'profile', icon: faUser },
 ];
 
+/**
+ * Sidebar
+ */
 export const Sidebar: React.FC = () => {
   const {
     theme: { sidebar },
-  } = React.useContext(StyleCtx);
+  } = useContext(StyleCtx);
   const {
     view: { currentView$, showView },
-  } = React.useContext(StoreCtx);
+  } = useContext(StoreCtx);
   const currentView = useObservable(() => currentView$, 'home');
 
   return (
@@ -61,6 +64,9 @@ export const Sidebar: React.FC = () => {
   );
 };
 
+/**
+ * Logo
+ */
 const Logo: React.FC<{ borderColor: string; showView: ShowViewFn }> = ({
   borderColor,
   showView,
@@ -79,6 +85,9 @@ const Logo: React.FC<{ borderColor: string; showView: ShowViewFn }> = ({
   </Flex>
 );
 
+/**
+ * Tab
+ */
 const Tab: React.FC<{
   tab: Tab;
   isActive: boolean;

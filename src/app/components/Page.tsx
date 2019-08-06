@@ -1,10 +1,13 @@
 import { Flex } from 'app/components/Flex';
 import { TitleText } from 'app/components/Typography';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { theme } from 'styles/theme';
 
+/**
+ * Page
+ */
 export const Page: React.FC<{ title: string }> = ({ title, children }) => {
-  React.useEffect(() => {
+  useEffect(() => {
     document.title = `Chatter | ${title}`;
   }, [title]);
 
@@ -15,6 +18,9 @@ export const Page: React.FC<{ title: string }> = ({ title, children }) => {
   );
 };
 
+/**
+ * Page Title
+ */
 export const PageTitle: React.FC = ({ children }) => (
   <Flex
     css={{

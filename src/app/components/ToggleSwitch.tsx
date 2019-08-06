@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { StyleCtx } from 'styles';
 import { Flex } from './Flex';
 
 export type ToggleDirection = 'left' | 'right';
 
+/**
+ * Toggle Switch
+ */
 export const ToggleSwitch: React.FC<{
   leftLabelText: string;
   rightLabelText: string;
@@ -13,7 +16,7 @@ export const ToggleSwitch: React.FC<{
   const {
     constants: { font },
     theme: { toggle },
-  } = React.useContext(StyleCtx);
+  } = useContext(StyleCtx);
 
   return (
     <Flex row css={{ cursor: 'pointer' }} onClick={onToggle}>
@@ -32,6 +35,9 @@ export const ToggleSwitch: React.FC<{
   );
 };
 
+/**
+ * Label
+ */
 const Label: React.FC<{
   text: string;
   isActive: boolean;
@@ -46,6 +52,9 @@ const Label: React.FC<{
   </Flex>
 );
 
+/**
+ * Switch
+ */
 const Switch: React.FC<{
   direction: ToggleDirection;
   theme: { bg: string; bgKnob: string; border: string };

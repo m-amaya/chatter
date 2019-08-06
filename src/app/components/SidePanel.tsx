@@ -1,11 +1,11 @@
 import { Flex } from 'app/components/Flex';
-import React from 'react';
+import React, { useContext } from 'react';
 import { StyleCtx } from 'styles';
 
 export const SidePanel: React.FC = () => {
   const {
     theme: { sidepanel },
-  } = React.useContext(StyleCtx);
+  } = useContext(StyleCtx);
 
   return (
     <Flex

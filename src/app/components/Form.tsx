@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { ComponentProps } from 'react';
 import TextareaAutosize from 'react-autosize-textarea';
 import { constants } from 'styles/constants';
 import { Flex, FlexButton } from './Flex';
 
 const { font } = constants;
 
+const defaultOnClick: ClickHandler<HTMLButtonElement> = (e) =>
+  e.preventDefault();
+
+/**
+ * Text Area
+ */
 export const Textarea: React.FC<
-  React.ComponentProps<typeof TextareaAutosize> & {
+  ComponentProps<typeof TextareaAutosize> & {
     theme: { fgPlaceholder: string };
   }
 > = ({ theme, ...rest }) => (
@@ -26,11 +32,11 @@ export const Textarea: React.FC<
   </Flex>
 );
 
-const defaultOnClick: ClickHandler<HTMLButtonElement> = (e) =>
-  e.preventDefault();
-
+/**
+ * Button
+ */
 export const Button: React.FC<
-  React.ComponentProps<typeof FlexButton> & {
+  ComponentProps<typeof FlexButton> & {
     text: string;
     onClick?: ClickHandler<HTMLButtonElement>;
     theme: { bg: string; fg: string };

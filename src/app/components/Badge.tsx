@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { StyleCtx } from 'styles';
 
 export const Badge: React.FC = (props) => {
   const {
     constants: { font },
     theme: { badge },
-  } = React.useContext(StyleCtx);
+  } = useContext(StyleCtx);
 
   return (
     <span
