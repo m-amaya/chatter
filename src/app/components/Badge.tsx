@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleCtx } from 'styles';
 
-export const Badge: React.FC = () => {
+export const Badge: React.FC = (props) => {
   const {
     constants: { font },
     theme: { badge },
@@ -16,8 +16,8 @@ export const Badge: React.FC = () => {
         fontSize: '0.8em',
         fontWeight: font.weight.text.bold,
         padding: '0 5px',
-      }}>
-      8
-    </span>
+      }}
+      {...props}
+    />
   );
 };

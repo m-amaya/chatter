@@ -5,17 +5,21 @@ import {
 } from '@fortawesome/react-fontawesome';
 import { FlexForm, Flex } from 'app/components/Flex';
 import { TimestampText, UsernameText } from 'app/components/Typography';
-import React from 'react';
+import React, { useContext } from 'react';
 import TimeAgo from 'react-timeago';
 import { Post } from 'store/chatter.store';
 import { User } from 'store/user.store';
 import { StyleCtx } from 'styles';
 import { Textarea, Button } from './Form';
 
-export const ChatterForm: React.FC<{ user: User }> = ({ user }) => {
+export const ChatterForm: React.FC<{
+  user: User;
+  onChange: ClickHandler<HTMLTextAreaElement>;
+  onSubmit: ClickHandler<HTMLButtonElement>;
+}> = ({ user, onChange, onSubmit }) => {
   const {
     theme: { button, card },
-  } = React.useContext(StyleCtx);
+  } = useContext(StyleCtx);
 
   return (
     <FlexForm
@@ -29,10 +33,14 @@ export const ChatterForm: React.FC<{ user: User }> = ({ user }) => {
           icon={user.icon}
           theme={{ bg: card.bgPlacemat, border: card.border, fg: user.color }}
         />
-        <Textarea placeholder="What's on your mind?" theme={card} />
+        <Textarea
+          placeholder="What's on your mind?"
+          theme={card}
+          onChange={onChange}
+        />
       </Flex>
       <Flex justify="end" row>
-        <Button text="Post" type="submit" theme={button} />
+        <Button text="Post" type="submit" theme={button} onClick={onSubmit} />
       </Flex>
     </FlexForm>
   );
@@ -40,16 +48,18 @@ export const ChatterForm: React.FC<{ user: User }> = ({ user }) => {
 
 export const ChatterCard: React.FC<{
   post: Post;
+  isLiked?: boolean;
+  onLike(post: Post): void;
   user: User;
-}> = ({
-  post: { username, timestamp, content, count, isLiked, isDisliked },
-  user,
-}) => {
+}> = ({ post, isLiked, onLike, user }) => {
+  const isDisliked = false;
   const {
     theme: { card },
-  } = React.useContext(StyleCtx);
+  } = useContext(StyleCtx);
   const likedColor = isLiked ? card.fgLiked : card.border;
   const dislikedColor = isDisliked ? card.fgDisliked : card.border;
+
+  const onClick = () => onLike(post);
 
   return (
     <Placemat
@@ -73,17 +83,18 @@ export const ChatterCard: React.FC<{
             }}
           />
           <Flex css={{ paddingLeft: '1em' }}>
-            <UsernameText>{username}</UsernameText>
+            <UsernameText>{user.username}</UsernameText>
             <TimestampText>
-              <TimeAgo date={timestamp} /> &bull; Post #{count}
+              <TimeAgo date={post.timestamp} /> &bull; Post #{post.count}
             </TimestampText>
           </Flex>
         </CardHead>
-        <CardBody>{content}</CardBody>
+        <CardBody>{post.content}</CardBody>
       </Card>
       <ThumbColumn
         isLiked={isLiked}
         isDisliked={isDisliked}
+        onClick={onClick}
         theme={{
           fgHover: card.fgHover,
           fgLiked: likedColor,
@@ -147,17 +158,19 @@ const CardBody: React.FC = (props) => (
 const ThumbColumn: React.FC<{
   isLiked?: boolean;
   isDisliked?: boolean;
+  onClick: ClickHandler;
   theme: {
     fgHover: string;
     fgLiked: string;
     fgDisliked: string;
     bgHover: string;
   };
-}> = ({ isLiked, isDisliked, theme }) => (
+}> = ({ isLiked, isDisliked, onClick, theme }) => (
   <Flex align="center" justify="end" css={{ paddingBottom: '1em', width: 50 }}>
     <ThumbIcon
       direction="up"
       isLiked={isLiked}
+      onClick={onClick}
       theme={{
         fg: theme.fgLiked,
         fgHover: theme.fgHover,
@@ -180,27 +193,30 @@ const ThumbIcon: React.FC<{
   direction: 'up' | 'down';
   isLiked?: boolean;
   isDisliked?: boolean;
+  onClick?: ClickHandler;
   theme: { fg: string; fgHover: string; bgHover: string };
-}> = ({ direction, isLiked, isDisliked, theme }) => {
+}> = ({ direction, isLiked, isDisliked, onClick, theme }) => {
   const isSelected =
     (direction === 'up' && isLiked) || (direction === 'down' && isDisliked);
 
   return (
-    <FontAwesomeIcon
-      icon={direction === 'up' ? faThumbsUp : faThumbsDown}
-      css={{
-        'borderRadius': '50%',
-        'color': theme.fg,
-        'cursor': 'pointer',
-        'fontSize': '2em',
-        'padding': 6,
-        'transition': 'all 200ms',
-        '&:hover': {
-          backgroundColor: theme.bgHover,
-          color: !isSelected ? theme.fgHover : undefined,
-        },
-      }}
-    />
+    <Flex onClick={onClick}>
+      <FontAwesomeIcon
+        icon={direction === 'up' ? faThumbsUp : faThumbsDown}
+        css={{
+          'borderRadius': '50%',
+          'color': theme.fg,
+          'cursor': 'pointer',
+          'fontSize': '2em',
+          'padding': 6,
+          'transition': 'all 200ms',
+          '&:hover': {
+            backgroundColor: theme.bgHover,
+            color: !isSelected ? theme.fgHover : undefined,
+          },
+        }}
+      />
+    </Flex>
   );
 };
 

@@ -2,20 +2,21 @@ import React from 'react';
 import { StyleCtx } from 'styles';
 import { Flex } from './Flex';
 
-type ToggleDirection = 'left' | 'right';
+export type ToggleDirection = 'left' | 'right';
 
 export const ToggleSwitch: React.FC<{
   leftLabelText: string;
   rightLabelText: string;
   direction: ToggleDirection;
-}> = ({ leftLabelText, rightLabelText, direction }) => {
+  onToggle: ClickHandler;
+}> = ({ leftLabelText, rightLabelText, direction, onToggle }) => {
   const {
     constants: { font },
     theme: { toggle },
   } = React.useContext(StyleCtx);
 
   return (
-    <Flex row css={{ cursor: 'pointer' }}>
+    <Flex row css={{ cursor: 'pointer' }} onClick={onToggle}>
       <Label
         text={leftLabelText}
         isActive={direction === 'left'}

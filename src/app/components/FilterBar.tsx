@@ -1,14 +1,19 @@
 import { Badge } from 'app/components/Badge';
 import { Flex } from 'app/components/Flex';
-import { ToggleSwitch } from 'app/components/ToggleSwitch';
+import { ToggleDirection, ToggleSwitch } from 'app/components/ToggleSwitch';
 import { Link } from 'app/components/Typography';
-import React from 'react';
+import React, { useContext } from 'react';
 import { StyleCtx } from 'styles';
 
-export const FilterBar: React.FC = () => {
+export const FilterBar: React.FC<{
+  toggleDirection: ToggleDirection;
+  likedCount: number;
+  onToggle: ClickHandler;
+  onClear: ClickHandler;
+}> = ({ toggleDirection, likedCount, onToggle, onClear }) => {
   const {
     theme: { page },
-  } = React.useContext(StyleCtx);
+  } = useContext(StyleCtx);
 
   return (
     <Flex
@@ -20,11 +25,12 @@ export const FilterBar: React.FC = () => {
         <ToggleSwitch
           leftLabelText="All"
           rightLabelText="Liked"
-          direction="left"
+          direction={toggleDirection}
+          onToggle={onToggle}
         />
-        <Badge>20</Badge>
+        <Badge>{likedCount}</Badge>
       </Flex>
-      <Link>Clear</Link>
+      <Link onClick={onClear}>Clear</Link>
     </Flex>
   );
 };
