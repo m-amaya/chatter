@@ -5,26 +5,11 @@ import { AlertsPage } from 'app/pages/AlertsPage';
 import { BrowsePage } from 'app/pages/BrowsePage';
 import { HomePage } from 'app/pages/HomePage';
 import { ProfilePage } from 'app/pages/ProfilePage';
-import React from 'react';
+import React, { useContext } from 'react';
 import { hot } from 'react-hot-loader/root';
 import { useObservable } from 'rxjs-hooks';
 import { StoreCtx } from 'store';
 import { View } from 'store/view.store';
-
-export const App: React.FC = hot(() => {
-  const {
-    view: { currentView$ },
-  } = React.useContext(StoreCtx);
-  const currentView = useObservable(() => currentView$, 'home');
-
-  return (
-    <Flex row css={{ height: '100vh' }}>
-      <Sidebar />
-      {renderPage(currentView)}
-      <SidePanel />
-    </Flex>
-  );
-});
 
 const renderPage = (view: View) => {
   switch (view) {
@@ -40,3 +25,18 @@ const renderPage = (view: View) => {
       return <HomePage />;
   }
 };
+
+export const App: React.FC = hot(() => {
+  const {
+    view: { currentView$ },
+  } = useContext(StoreCtx);
+  const currentView = useObservable(() => currentView$, 'home');
+
+  return (
+    <Flex row css={{ height: '100vh' }}>
+      <Sidebar />
+      {renderPage(currentView)}
+      <SidePanel />
+    </Flex>
+  );
+});

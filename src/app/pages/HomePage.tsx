@@ -12,7 +12,7 @@ import { Post } from 'store/chatter.store';
 
 export const HomePage: React.FC = () => {
   const {
-    chatter: { likedPostsForView$, postsForView$, post, like, unlike, clear },
+    chatter: { likedPostsForView$, postsForView$, send, like, unlike, clear },
     user,
   } = useContext(StoreCtx);
   const [content, setContent] = useState('');
@@ -30,15 +30,14 @@ export const HomePage: React.FC = () => {
   const onSubmit: ClickHandler<HTMLButtonElement> = (event) => {
     event.preventDefault();
     if (content) {
-      post(content);
+      send(content);
     }
   };
 
-  const onLike = (post: Post) => {
-    isNil(likedRecord[post.id])
-      ? like(post, likedRecord)
-      : unlike(post.id, likedRecord);
-  };
+  const onLike = (likedPost: Post) =>
+    isNil(likedRecord[likedPost.id])
+      ? like(likedPost, likedRecord)
+      : unlike(likedPost.id, likedRecord);
 
   const onToggle = () =>
     setToggleDirection(toggleDirection === 'left' ? 'right' : 'left');

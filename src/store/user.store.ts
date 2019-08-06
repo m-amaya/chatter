@@ -42,13 +42,14 @@ const USER_COLLECTION: User[] = [
 ];
 
 export class UserStore {
-  constructor() {
+  public collection: User[];
+
+  public session: User;
+
+  public constructor() {
     this.collection = USER_COLLECTION;
     this.session = USER_COLLECTION[0];
   }
-
-  public collection: User[];
-  public session: User;
 
   public get byUsername() {
     return indexBy((user) => user.username, this.collection);

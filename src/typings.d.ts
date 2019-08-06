@@ -4,5 +4,9 @@ declare module '*.svg' {
 }
 
 type CssSize = string | number;
-type Size = { width: CssSize; height: CssSize };
 type ClickHandler<T = unknown> = (e: React.SyntheticEvent<T>) => void;
+
+interface Size {
+  height: CssSize;
+  width: CssSize;
+}

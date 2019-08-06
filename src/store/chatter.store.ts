@@ -33,14 +33,7 @@ const scanPosts = scan<Post, Post[]>(
 );
 
 export class ChatterStore {
-  constructor(private user: UserStore) {
-    this.posts$ = merge(
-      ...this.user.collection.map(createPostStream),
-      this.newPost$,
-    );
-
-    this.posts$.pipe(scanPosts).subscribe(this.postsForView$);
-  }
+  private user: UserStore;
 
   private posts$: Observable<Post>;
 
@@ -50,7 +43,16 @@ export class ChatterStore {
 
   public likedPostsForView$ = new BehaviorSubject<Record<string, Post>>({});
 
-  public post = (content: string) =>
+  public constructor(user: UserStore) {
+    this.user = user;
+    this.posts$ = merge(
+      ...user.collection.map(createPostStream),
+      this.newPost$,
+    );
+    this.posts$.pipe(scanPosts).subscribe(this.postsForView$);
+  }
+
+  public send = (content: string) =>
     this.newPost$.next({
       id: uuid(),
       username: this.user.session.username,

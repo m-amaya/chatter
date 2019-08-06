@@ -7,15 +7,17 @@ import { ViewStore } from './view.store';
  * Store, created with initial state
  */
 export class Store {
+  public chatter: ChatterStore;
+
+  public user: UserStore;
+
+  public view: ViewStore;
+
   public constructor() {
     this.view = new ViewStore();
     this.user = new UserStore();
     this.chatter = new ChatterStore(this.user);
   }
-
-  public chatter: ChatterStore;
-  public user: UserStore;
-  public view: ViewStore;
 }
 
 /**

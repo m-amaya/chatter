@@ -14,8 +14,8 @@
     "deploy": "sh deploy.sh",
     "lint": "eslint ./src --ext .js,.ts,.tsx",
     "type": "tsc",
-    "verify": "run-s lint type test",
-    "test": "jest"
+    "test": "jest",
+    "verify": "run-s lint type"
   },
   "browserslist": [
     "defaults",
