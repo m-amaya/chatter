@@ -1,5 +1,12 @@
 import { filter } from 'ramda';
-import { BehaviorSubject, interval, merge, Observable, Subject } from 'rxjs';
+import {
+  BehaviorSubject,
+  interval,
+  merge,
+  Observable,
+  Subject,
+  Subscription,
+} from 'rxjs';
 import { map, scan } from 'rxjs/operators';
 import { generateChatterText } from 'utils/lorem';
 import { v4 as uuid } from 'uuid';
@@ -13,7 +20,7 @@ export interface Post {
   count: number;
 }
 
-const createPostStream = ({ postFrequency, username }: User) =>
+const createUserPosts = ({ postFrequency, username }: User) =>
   interval(postFrequency).pipe(
     map<number, Post>((idx) => ({
       id: uuid(),
@@ -35,7 +42,7 @@ const scanPosts = scan<Post, Post[]>(
 export class ChatterStore {
   private user: UserStore;
 
-  private posts$: Observable<Post>;
+  private postsSub: Subscription;
 
   private newPost$ = new Subject<Post>();
 
@@ -45,11 +52,7 @@ export class ChatterStore {
 
   public constructor(user: UserStore) {
     this.user = user;
-    this.posts$ = merge(
-      ...user.collection.map(createPostStream),
-      this.newPost$,
-    );
-    this.posts$.pipe(scanPosts).subscribe(this.postsForView$);
+    this.postsSub = this.createPostsStream().subscribe(this.postsForView$);
   }
 
   public send = (content: string) =>
@@ -61,6 +64,11 @@ export class ChatterStore {
       count: 0,
     });
 
+  private createPostsStream = () =>
+    merge(...this.user.collection.map(createUserPosts), this.newPost$).pipe(
+      scanPosts,
+    );
+
   public like = (post: Post, record: Record<string, Post>) =>
     this.likedPostsForView$.next({ ...record, [post.id]: post });
 
@@ -71,6 +79,8 @@ export class ChatterStore {
 
   public clear = () => {
     this.postsForView$.next([]);
+    this.postsSub.unsubscribe();
+    this.postsSub = this.createPostsStream().subscribe(this.postsForView$);
     this.likedPostsForView$.next({});
   };
 }
