@@ -1,12 +1,5 @@
 import { filter } from 'ramda';
-import {
-  BehaviorSubject,
-  interval,
-  merge,
-  Observable,
-  Subject,
-  Subscription,
-} from 'rxjs';
+import { BehaviorSubject, interval, merge, Subject, Subscription } from 'rxjs';
 import { map, scan } from 'rxjs/operators';
 import { generateChatterText } from 'utils/lorem';
 import { v4 as uuid } from 'uuid';
